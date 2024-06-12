@@ -4,7 +4,7 @@ fn is_vowel(c: &char) -> bool {
     VOWELS.contains(&c)
 }
 
-fn countVowels(s: &str) -> i32 {
+fn count_vowels(s: &str) -> i32 {
     return s.chars().into_iter()
     .filter(|c| is_vowel(c))
     .count().try_into().unwrap_or(0)
