@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+  "interview",	
+  "features",
+  "exercise",
+]

@@ -1,0 +1,47 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Scala",
+            "type": "shell",
+            "command": "sbt compile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/scala"
+            }
+        },
+        {
+            "label": "Run Scala",
+            "type": "shell",
+            "command": "sbt run",
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/scala"
+            }
+        },
+        {
+            "label": "Build Rust",
+            "type": "shell",
+            "command": "cargo build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/rust"
+            }
+        },
+        {
+            "label": "Run Rust",
+            "type": "shell",
+            "command": "cargo run",
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/rust"
+            }
+        }
+    ]
+}
