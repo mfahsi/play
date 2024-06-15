@@ -5,6 +5,12 @@
 *.so
 *.dylib
 
+target/
+.bloop/
+.bsp/
+
+scala/.bloop/
+
 # Test binary, built with `cargo test`
 *.test
 
@@ -73,3 +79,11 @@ yarn-error.log
 
 # Generated files by Cargo (optional)
 .cargo/
+
+bin/.coursier
+bin/.scalafmt*
+
+package-lock.json
+.metals/
+**/metals.sbt
+*.lock
