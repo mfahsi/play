@@ -3,3 +3,5 @@ mod linkedlist;
 mod lists;
 
 mod smartpointers;
+
+mod graphs;

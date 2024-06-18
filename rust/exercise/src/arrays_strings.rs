@@ -2,10 +2,10 @@ use std::collections::HashSet;
 
 ///are_all_unique check all char in a string are unique
 
-fn are_all_unique(s : &str)->bool {
-  let mut ss = HashSet::new();
-  ss.extend(s.chars());
-  ss.len() == s.len()
+fn are_all_unique(s: &str) -> bool {
+    let mut ss = HashSet::new();
+    ss.extend(s.chars());
+    ss.len() == s.len()
 }
 
 fn are_all_unique_no_struct(s: &str) -> bool {
@@ -74,27 +74,28 @@ fn one_edit_away(s1: &str, s2: &str) -> bool {
 
 
 type Matrix = Vec<Vec<i32>>;
-/// zeroMatrix set a matrix to zero all row and column if i,j is 0 
-fn zero_matrix(matrix: &mut Matrix)->&mut Matrix {
+
+/// zeroMatrix set a matrix to zero all row and column if i,j is 0
+fn zero_matrix(matrix: &mut Matrix) -> &mut Matrix {
     let m = matrix.len();
     let n = matrix[0].len();
     let copy = matrix.clone();
 
-    for i in 0..=(m-1) {
-        for j in 0..=(n-1) {
-            println!("check {},{} ?? {}",i,j,copy[i][j]);
+    for i in 0..=(m - 1) {
+        for j in 0..=(n - 1) {
+            println!("check {},{} ?? {}", i, j, copy[i][j]);
             if copy[i][j] == 0 {
-                set_zeros(matrix, i,j);
+                set_zeros(matrix, i, j);
             }
         }
     }
     matrix
 }
 
-fn set_zeros(matrix: &mut Matrix, i:usize,j:usize)-> &mut Matrix {
+fn set_zeros(matrix: &mut Matrix, i: usize, j: usize) -> &mut Matrix {
     matrix[i].iter_mut().for_each(|x| *x = 0);
-    for cur in 0..=(matrix.len()-1) {
-        matrix[cur][j] = 0; 
+    for cur in 0..=(matrix.len() - 1) {
+        matrix[cur][j] = 0;
     }
     matrix
 }
@@ -102,43 +103,42 @@ fn set_zeros(matrix: &mut Matrix, i:usize,j:usize)-> &mut Matrix {
 
 #[cfg(test)]
 mod tests {
-  use super::*;
-  #[test]
+    use super::*;
+
+    #[test]
     fn test_are_all_unique_edge_cases() {
         assert_eq!(are_all_unique(""), true);
         assert_eq!(are_all_unique("a"), true);
         assert_eq!(are_all_unique("aa"), false);
     }
 
-  #[test]
-  fn test_are_all_unique_normal_cases() {
-    assert_eq!(are_all_unique("12$74"), true);
-    assert_eq!(are_all_unique("12$724"), false);
-  }
-  
-  #[test]
-  fn test_are_all_unique_no_struct() {
-    assert_eq!(are_all_unique_no_struct("abc"), true);
-    assert_eq!(are_all_unique_no_struct("abcb"), false);
-  }
+    #[test]
+    fn test_are_all_unique_normal_cases() {
+        assert_eq!(are_all_unique("12$74"), true);
+        assert_eq!(are_all_unique("12$724"), false);
+    }
+
+    #[test]
+    fn test_are_all_unique_no_struct() {
+        assert_eq!(are_all_unique_no_struct("abc"), true);
+        assert_eq!(are_all_unique_no_struct("abcb"), false);
+    }
 
 
-  #[test]
-  fn test_one_away() {
-    assert_eq!(one_edit_away("abcd","axcd"), true);
-    assert_eq!(one_edit_away("abcd","abxd"), true);
-    assert_eq!(one_edit_away("abcd","abxdy"), false);
-    assert_eq!(one_edit_away("abcd","axyd"), false);
-  }
+    #[test]
+    fn test_one_away() {
+        assert_eq!(one_edit_away("abcd", "axcd"), true);
+        assert_eq!(one_edit_away("abcd", "abxd"), true);
+        assert_eq!(one_edit_away("abcd", "abxdy"), false);
+        assert_eq!(one_edit_away("abcd", "axyd"), false);
+    }
 
-  #[test]
-  fn test_zero_matrix() {
-    let mut mx:Matrix = vec![vec![1,2,3],vec![4,5,0],vec![7,8,9]];
-    let expected: Matrix = vec![vec![1,2,0],vec![0,0,0],vec![7,8,0]];
-    let mut v = zero_matrix(&mut mx);
-   // assert_eq!(v.to_owned(), expected);
-    assert_eq!(v.to_owned(), expected);
-  }
-
-  
+    #[test]
+    fn test_zero_matrix() {
+        let mut mx: Matrix = vec![vec![1, 2, 3], vec![4, 5, 0], vec![7, 8, 9]];
+        let expected: Matrix = vec![vec![1, 2, 0], vec![0, 0, 0], vec![7, 8, 0]];
+        let mut v = zero_matrix(&mut mx);
+        // assert_eq!(v.to_owned(), expected);
+        assert_eq!(v.to_owned(), expected);
+    }
 }
