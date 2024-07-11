@@ -1,0 +1,186 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>scala-project</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <scala.version>3.4.2</scala.version>
+        <http4s.version>0.23.27</http4s.version>
+        <circe.version>0.14.5</circe.version>
+        <scalatest.version>3.2.15</scalatest.version>
+        <typesafe.config.version>1.4.3</typesafe.config.version>
+        <logback.version>1.5.6</logback.version>
+        <cats-effect.version>3.5.3</cats-effect.version>
+        <munit.version>0.7.29</munit.version>
+        <munit.cats.effect.version>1.0.7</munit.cats.effect.version>
+        <junit.version>5.8.1</junit.version>
+    </properties>
+
+    <dependencies>
+        <!-- HTTP4S Dependencies -->
+        <dependency>
+            <groupId>org.http4s</groupId>
+            <artifactId>http4s-core_3</artifactId>
+            <version>${http4s.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.http4s</groupId>
+            <artifactId>http4s-ember-server_3</artifactId>
+            <version>${http4s.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.http4s</groupId>
+            <artifactId>http4s-ember-client_3</artifactId>
+            <version>${http4s.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.http4s</groupId>
+            <artifactId>http4s-circe_3</artifactId>
+            <version>${http4s.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.http4s</groupId>
+            <artifactId>http4s-dsl_3</artifactId>
+            <version>${http4s.version}</version>
+        </dependency>
+
+        <!-- Circe Dependencies -->
+        <!-- <dependency>
+             <groupId>io.circe</groupId>
+             <artifactId>circe-core_3</artifactId>
+             <version>${circe.version}</version>
+         </dependency>
+         <dependency>
+             <groupId>io.circe</groupId>
+             <artifactId>circe-generic_3</artifactId>
+             <version>${circe.version}</version>
+         </dependency>
+         <dependency>
+             <groupId>io.circe</groupId>
+             <artifactId>circe-literal_3</artifactId>
+             <version>${circe.version}</version>
+         </dependency>
+         <dependency>
+             <groupId>io.circe</groupId>
+             <artifactId>circe-parser_3</artifactId>
+             <version>${circe.version}</version>
+         </dependency>
+         <dependency>
+             <groupId>io.circe</groupId>
+             <artifactId>circe-config_3</artifactId>
+             <version>0.10.0</version>
+         </dependency> -->
+
+        <!-- Java Dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Other Dependencies -->
+        <dependency>
+            <groupId>com.typesafe</groupId>
+            <artifactId>config</artifactId>
+            <version>${typesafe.config.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <!-- Test Dependencies -->
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_3</artifactId>
+            <version>${scalatest.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.scalameta</groupId>
+            <artifactId>munit_3</artifactId>
+            <version>${munit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.typelevel</groupId>
+            <artifactId>munit-cats-effect-3_3</artifactId>
+            <version>${munit.cats.effect.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Scala Maven Plugin -->
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>4.7.2</version>
+                <executions>
+                    <execution>
+                        <id>scala-compile-first</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scalaVersion>${scala.version}</scalaVersion>
+                </configuration>
+            </plugin>
+
+            <!-- Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                </configuration>
+            </plugin>
+
+            <!-- Scalafmt Maven Plugin
+            <plugin>
+                <groupId>org.antipathy</groupId>
+                <artifactId>mvn-scalafmt_2.13</artifactId>
+                <version>1.1.1640084764.9f463a9</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>typesafe-repo</id>
+            <name>Typesafe repository</name>
+            <url>https://repo.typesafe.com/typesafe/releases/</url>
+        </repository>
+        <repository>
+            <id>maven-central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <repository>
+            <id>sonatype-oss</id>
+            <name>Sonatype OSS</name>
+            <url>https://oss.sonatype.org/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+</project>
