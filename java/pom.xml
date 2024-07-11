@@ -8,9 +8,14 @@
     <version>0.1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.release>23</maven.compiler.release>
+        <maven.compiler.args>--enable-preview</maven.compiler.args>
+        <java.version>23</java.version>
+        <java.target.version>21</java.target.version>
         <scala.version>3.4.2</scala.version>
+
         <http4s.version>0.23.27</http4s.version> <!-- use cats effects 3.5.4 -->
         <circe.version>0.14.5</circe.version>
         <scalatest.version>3.2.15</scalatest.version>
@@ -19,11 +24,17 @@
         <cats-effect.version>3.5.4</cats-effect.version>
         <munit.version>0.7.29</munit.version>
         <munit.cats.effect.version>1.0.7</munit.cats.effect.version>
-        <junit.version>5.8.1</junit.version>
+        <junit.version>5.9.1</junit.version>
     </properties>
 
     <dependencies>
-        <!-- HTTP4S Dependencies -->
+        <!-- Scala Library Dependency -->
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala3-library_3</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <!-- HTTP4S Dependencies
         <dependency>
             <groupId>org.http4s</groupId>
             <artifactId>http4s-core_3</artifactId>
@@ -48,7 +59,7 @@
             <groupId>org.http4s</groupId>
             <artifactId>http4s-dsl_3</artifactId>
             <version>${http4s.version}</version>
-        </dependency>
+        </dependency> -->
 
         <!-- Circe Dependencies -->
         <!-- <dependency>
@@ -112,6 +123,12 @@
         </dependency>
         <dependency>
             <groupId>org.typelevel</groupId>
+            <artifactId>cats-effect_3</artifactId>
+            <version>${cats-effect.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.typelevel</groupId>
             <artifactId>munit-cats-effect-3_3</artifactId>
             <version>${munit.cats.effect.version}</version>
             <scope>test</scope>
@@ -120,11 +137,11 @@
 
     <build>
         <plugins>
-            <!-- Scala Maven Plugin -->
+            <!-- Scala Maven Plugin
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
-                <version>4.7.2</version>
+                <version>4.9.2</version>
                 <executions>
                     <execution>
                         <id>scala-compile-first</id>
@@ -136,17 +153,36 @@
                 </executions>
                 <configuration>
                     <scalaVersion>${scala.version}</scalaVersion>
+                    <javaVersion>${java.target.version}</javaVersion>
+                    <jvmArgs>
+                        <jvmArg>enable-preview</jvmArg>
+                    </jvmArgs>
                 </configuration>
-            </plugin>
+            </plugin>-->
 
-            <!-- Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.13.0</version>
                 <configuration>
-                    <source>21</source>
-                    <target>21</target>
+                    <source> ${java.version}</source>
+                    <target> ${java.target.version}</target>
+                    <release>${maven.compiler.release}</release>
+                    <compilerArgs>
+                        <arg>--enable-preview</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <!-- Surefire Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <argLine>--enable-preview</argLine>
+                    <systemPropertyVariables>
+                        <java.version>${java.version}</java.version>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
 
