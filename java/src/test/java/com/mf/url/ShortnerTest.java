@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ShortnerTest {
 
     UrlRepository  repo =  new UrlRepositoryInMem();
-    Shortner  urlShortner =  new ShortnerImpl(repo);
+    ShortUrlService urlShortner =  new ShortUrlServiceImpl(repo);
 
     @BeforeEach
     void setUp() {
         System.out.println("reset");
         repo = new UrlRepositoryInMem();
-        urlShortner =  new ShortnerImpl(repo);
+        urlShortner =  new ShortUrlServiceImpl(repo);
     }
 
     @Test
