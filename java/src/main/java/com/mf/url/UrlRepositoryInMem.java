@@ -4,6 +4,7 @@ import net.jcip.annotations.ThreadSafe;
 
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 @ThreadSafe
@@ -12,11 +13,17 @@ public class UrlRepositoryInMem implements UrlRepository {
     private ConcurrentHashMap<String, String> db = new ConcurrentHashMap();
     private ConcurrentHashMap<String, String> dbRev = new ConcurrentHashMap();
 
+    private AtomicInteger urlCount = new AtomicInteger(100);
+
     @Override
     public synchronized Optional<String> createIfNotExists(String url, String shortUrl) {
-        db.putIfAbsent(url, shortUrl);
-        dbRev.put(db.get(url), url);
-        return Optional.of(db.get(url));
+        if (db.containsKey(url)) {
+            return Optional.of(db.get(url));
+        }else{
+            dbRev.put(db.get(url), url);
+            urlCount.incrementAndGet();
+            return Optional.of(db.get(url));
+        }
     }
 
     @Override
