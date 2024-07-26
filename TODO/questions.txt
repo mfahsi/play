@@ -15,8 +15,6 @@ partition vs sharding, cqrs, stability patterns, types of deployments
 
 Write a simple money transfer service that is thread safe and lock free. Classic problem, just order it
 
-Write a simple money transfer service that is thread safe and lock free. Classic problem, just order it
-
 
 
 1. 	Create a LoadBalancer class that has a method to register backend instances
