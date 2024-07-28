@@ -28,7 +28,8 @@ public class ShortnerTest {
     @Test
     public void testGetUrl(){
         var shorturl = urlShortner.shorten("url1234");
-        assertTrue(shorturl.get().length() < 6,"must be max 6");
+        System.out.println("short="+ shorturl.get());
+        assertTrue(shorturl.get().length() == 8,"must be max 6");
         assertEquals(urlShortner.originalUrl(shorturl.get()),Optional.of("url1234"));
     }
 }

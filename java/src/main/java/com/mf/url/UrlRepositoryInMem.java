@@ -20,7 +20,8 @@ public class UrlRepositoryInMem implements UrlRepository {
         if (db.containsKey(url)) {
             return Optional.of(db.get(url));
         }else{
-            dbRev.put(db.get(url), url);
+            db.put(url,shortUrl);
+            dbRev.put(shortUrl, url);
             urlCount.incrementAndGet();
             return Optional.of(db.get(url));
         }

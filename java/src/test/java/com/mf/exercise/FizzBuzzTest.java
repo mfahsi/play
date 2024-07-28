@@ -1,4 +1,4 @@
-package interview;
+package com.mf.exercise;
 
 import org.junit.jupiter.api.Test;
 

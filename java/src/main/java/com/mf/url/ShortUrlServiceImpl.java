@@ -2,7 +2,11 @@ package com.mf.url;
 
 import scala.util.Random;
 
+import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.random.RandomGenerator;
+import java.util.stream.Collectors;
 
 public class ShortUrlServiceImpl implements ShortUrlService {
     private final UrlRepository repo;
@@ -18,7 +22,7 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         if(repo.getOriginalUrl(url).isPresent()){
             return repo.getOriginalUrl(url);
         }else{
-            return repo.createIfNotExists(url, pickAshortUrl(url));
+            return repo.createIfNotExists(url, pickAshortUrl());
         }
     }
 
@@ -27,7 +31,12 @@ public class ShortUrlServiceImpl implements ShortUrlService {
        return repo.getOriginalUrl(shortUrl);
     }
 
-    String pickAshortUrl(String shortUrl) {
-        return gen.nextString(8);
+    private String pickAshortUrl() {
+        // Define the character set for the short URL
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        return RandomGenerator.getDefault().ints(8, 0, characters.length())
+                .mapToObj(characters::charAt)
+                .map(Object::toString)
+                .collect(Collectors.joining());
     }
 }
