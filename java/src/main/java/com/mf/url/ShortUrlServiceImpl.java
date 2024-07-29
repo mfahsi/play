@@ -11,10 +11,12 @@ import java.util.stream.Collectors;
 public class ShortUrlServiceImpl implements ShortUrlService {
     private final UrlRepository repo;
     private final Random gen = new scala.util.Random();
+    private final Integer MAX_URLS;
 
 
-    public ShortUrlServiceImpl(UrlRepository aRepo ) {
+    public ShortUrlServiceImpl(UrlRepository aRepo, Integer maxUrls) {
         repo = aRepo;
+        MAX_URLS = maxUrls;
     }
 
     @Override

@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UrlRepositoryTest {
 
-    UrlRepository  repo =  new UrlRepositoryInMem();
+    UrlRepository  repo =  new UrlRepositoryInMem(2);
 
     @BeforeEach
     void setUp() {
         System.out.println("reset");
-        repo = new UrlRepositoryInMem();
+        repo = new UrlRepositoryInMem(2);
     }
 
     @Test

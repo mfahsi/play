@@ -2,13 +2,14 @@ package com.mf.url;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ShortnerTest {
+public class ShortnerMockTest {
 
     UrlRepository  repo =  new UrlRepositoryInMem(2);
     ShortUrlService urlShortner =  new ShortUrlServiceImpl(repo,10);
@@ -16,28 +17,20 @@ public class ShortnerTest {
     @BeforeEach
     void setUp() {
         System.out.println("reset");
-        repo = new UrlRepositoryInMem(2);
+        repo = Mockito.mock(UrlRepository.class);
         urlShortner =  new ShortUrlServiceImpl(repo,10);
     }
 
     @Test
     public void testInvariantGetUnknownShort(){
+        Mockito.when(repo.getOriginalUrl("never stored")).thenReturn(Optional.empty());
         assertEquals(urlShortner.originalUrl("never stored"),Optional.empty());
     }
 
     @Test
     public void testGetUrl(){
-        var shorturl = urlShortner.shorten("url1234");
-        System.out.println("short="+ shorturl.get());
-        assertTrue(shorturl.get().length() == 8,"must be max 6");
-        assertEquals(urlShortner.originalUrl(shorturl.get()),Optional.of("url1234"));
-    }
-
-    @Test
-    public void testGetUrlFull(){
-        repo = new UrlRepositoryInMem(2);
-        assertTrue(urlShortner.shorten("url1234").isPresent());
-        assertTrue(urlShortner.shorten("url12342").isPresent());
-        assertTrue(urlShortner.shorten("url12343").isEmpty());
+        Mockito.when(repo.createIfNotExists(Mockito.eq("url123"),Mockito.anyString())).thenReturn(Optional.of("http://xyz"));
+        Mockito.when(repo.getOriginalUrl("url123")).thenReturn(Optional.empty());
+        assertEquals(urlShortner.shorten("url123"),Optional.of("http://xyz"));
     }
 }

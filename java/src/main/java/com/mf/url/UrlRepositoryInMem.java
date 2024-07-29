@@ -7,12 +7,19 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @ThreadSafe
 public class UrlRepositoryInMem implements UrlRepository {
-    private ConcurrentHashMap<String, String> urlToShortUrl = new ConcurrentHashMap();
-    private ConcurrentHashMap<String, String> shortUrlToUrl = new ConcurrentHashMap();
+    private final ConcurrentHashMap<String, String> urlToShortUrl = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, String> shortUrlToUrl = new ConcurrentHashMap<>();
+    private final int maxUrls;
 
+    public UrlRepositoryInMem(int maxUrls) {
+        this.maxUrls = maxUrls;
+    }
 
     @Override
-    public Optional<String> createIfNotExists(String url, String shortUrl) {
+    public synchronized Optional<String> createIfNotExists(String url, String shortUrl) {
+        if (urlToShortUrl.size() >= maxUrls) {
+            return Optional.empty(); // Don't insert if the limit is reached
+        }
         return Optional.ofNullable(urlToShortUrl.computeIfAbsent(url, k -> {
             shortUrlToUrl.put(shortUrl, k);
             return shortUrl;

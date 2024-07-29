@@ -12,5 +12,7 @@ public interface UrlRepository {
     Optional<String> createIfNotExists(String url, String shortUrl);
 
     Optional<String> getOriginalUrl(String shortUrl);
+
+
 }
 
