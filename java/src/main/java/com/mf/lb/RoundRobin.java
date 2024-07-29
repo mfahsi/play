@@ -1,5 +1,7 @@
 package com.mf.lb;
 
+import scala.util.Either;
+
 import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Optional;
@@ -26,5 +28,17 @@ public class RoundRobin implements BalancingStrategy {
             return Optional.empty();
         }
       return  Optional.of(arr[(current.incrementAndGet() % arr.length )]);
+    }
+
+    @Override
+    public Either<String,String> electServer(HttpRequest request) {
+        String[] arr = nodes.stream().toArray(String[]::new);
+        if(arr.length == 0) {
+            return new scala.util.Left<String,String>("no servers");
+        }
+        if(arr.length > 10){
+            return new scala.util.Left<String,String>("size exceeded");
+        }
+        return  new scala.util.Right<String,String>(arr[(current.incrementAndGet() % arr.length )]);
     }
 }

@@ -1,0 +1,4 @@
+For a given URL, generate a short URL and retrieve the original by the generated one.
+
+max URLs 100
+
