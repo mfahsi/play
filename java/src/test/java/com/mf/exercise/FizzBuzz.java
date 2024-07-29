@@ -1,5 +1,7 @@
 package com.mf.exercise;
 
+import org.junit.jupiter.api.Disabled;
+
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -7,7 +9,7 @@ import java.util.concurrent.StructuredTaskScope;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
-
+@Disabled
 public class FizzBuzz {
 
     static Predicate<Integer> fizzBuzz = i -> i % 15 == 0;

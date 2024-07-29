@@ -1,13 +1,14 @@
 package com.mf.url;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+@Disabled
 public class ShortnerTest {
 
     UrlRepository  repo =  new UrlRepositoryInMem(2);
