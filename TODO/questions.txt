@@ -22,3 +22,12 @@ Write a simple money transfer service that is thread safe and lock free. Classic
 	Load balancer should accept up to 10 backend instances
 	The code should be production ready
 	The Loadbalancer will be released as a library
+	
+	
+	
+	//TODO
+    // random
+    //mockito
+    //Database indexes, isolation levels, partition vs sharding, cqrs, stability patterns, types of deployments
+     //Create a load balancer with max 10 servers and without duplicated servers
+     //Write a URL shortner which doesn't allow more than 100 URLs to be stored

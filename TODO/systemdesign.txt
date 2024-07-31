@@ -1,0 +1,11 @@
+Recap of the 10 Stability Patterns:
+Circuit Breaker: Prevents repeated execution of operations likely to fail to avoid cascading failures.
+Bulkhead: Isolates system components to prevent failures in one part from affecting others.
+Retry: Automatically retries failed operations with backoff strategies to handle transient failures.
+Timeout: Limits the time allowed for an operation to complete to prevent indefinite waits and resource exhaustion.
+Throttling: Controls the rate of requests to manage load and ensure system responsiveness.
+Failover: Switches to backup components in case of failures to maintain service continuity.
+Service Mesh: Manages service-to-service communication, enhancing reliability in microservices architectures.
+Load Balancer: Distributes traffic across servers to prevent overload and improve system performance.
+Health Check: Monitors and checks the health of system components to detect and recover from failures.
+Idempotency: Ensures operations can be repeated without unintended side effects, enhancing resilience to failures.
