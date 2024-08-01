@@ -7,3 +7,4 @@ mod smartpointers;
 
 mod graphs;
 mod leetlist;
+mod sliding;
