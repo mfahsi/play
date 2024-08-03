@@ -1,6 +1,6 @@
-object MaxVowels2 {
+object MaxVowels2:
 
-  def maxVowels(s: String, k: Int): Int = {
+  def maxVowels(s: String, k: Int): Int =
     val vowels = Set('a', 'e', 'i', 'o', 'u')
     var maxVowelsCount = 0
     var currentVowelsCount = 0
@@ -18,5 +18,3 @@ object MaxVowels2 {
     }
 
     maxVowelsCount
-  }
-}
