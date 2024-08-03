@@ -39,12 +39,33 @@ object ArrayDifference:
       findDifferenceRec(nums1.distinct, nums2, Array(Array[Int](), nums2))
     result.map((arr: Array[Int]) => List.from(arr).distinct).toList
 
+  def findDifferenceWithSetApi(
+      nums1: Array[Int],
+      nums2: Array[Int]
+  ): List[List[Int]] =
+    val set1 = nums1.toSet
+    val set2 = nums2.toSet
+
+    val diff1 = set1.diff(set2).toList
+    val diff2 = set2.diff(set1).toList
+
+    List(diff1, diff2)
+
 class DiffArraysTest extends AnyFlatSpec with Matchers:
 
   behavior of "Difference"
 
   it should "diff of array" in {
     ArrayDifference.findDifference(
+      Array(-3, 6, -5, 4, 5, 5),
+      Array(6, 6, -3, -3, 3, 5)
+    ) should be(
+      List(List(-5, 4), List(3))
+    )
+  }
+
+  it should "diff of array set api" in {
+    ArrayDifference.findDifferenceWithSetApi(
       Array(-3, 6, -5, 4, 5, 5),
       Array(6, 6, -3, -3, 3, 5)
     ) should be(
