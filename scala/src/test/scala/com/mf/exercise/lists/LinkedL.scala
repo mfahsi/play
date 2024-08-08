@@ -9,10 +9,11 @@ enum LinkedL {
 
   def partition[T](e: LinkedL, f: Int => Boolean): LinkedL = {
     e match {
-      case Const(h, t) => f(h) match {
-        case true => Const(h, partition(t, f))
-        case false => concat(partition(t, f), h)
-      }
+      case Const(h, t) =>
+        f(h) match {
+          case true  => Const(h, partition(t, f))
+          case false => concat(partition(t, f), h)
+        }
       case End => End
     }
   }
@@ -20,7 +21,7 @@ enum LinkedL {
   def concat(e1: LinkedL, e2: Int): LinkedL = {
     e1 match {
       case Const(h, t) => Const(h, concat(t, e2))
-      case End => Const(e2, End)
+      case End         => Const(e2, End)
     }
   }
 }

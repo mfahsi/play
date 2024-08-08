@@ -25,7 +25,7 @@ object TreeDepthLists {
         queue: scala.collection.mutable.Queue[List[Tree[T]]],
         visisted: scala.collection.mutable.HashSet[Tree[T]]
     ): List[List[T]] = {
-      if (queue.isEmpty) {
+      if queue.isEmpty then {
         List.empty
       } else {
         val current: List[Tree[T]] = queue.dequeue().toList
@@ -33,10 +33,8 @@ object TreeDepthLists {
         val neighbours = current
           .map(n => List(n.left, n.right).filterNot(_.isEmpty).map(_.get))
           .flatten
-        if (!neighbours.isEmpty)
-          queue.enqueue(neighbours)
-        if (!l.isEmpty)
-          visisted.addAll(l)
+        if !neighbours.isEmpty then queue.enqueue(neighbours)
+        if !l.isEmpty then visisted.addAll(l)
         val rec = visit(queue, visisted)
         val result: List[T] = l.toList.map(_.root)
         rec match {

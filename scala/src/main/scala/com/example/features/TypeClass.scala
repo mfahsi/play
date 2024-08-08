@@ -12,7 +12,7 @@ inline def summonAll[A <: Tuple]: List[RandomGen[_]] =
     case _: EmptyTuple => Nil
     case _: (t *: ts)  => summonInline[RandomGen[t]] :: summonAll[ts]
 
-def toTuple(xs: List[_], acc: Tuple): Tuple =
+def toTuple(xs: List[?], acc: Tuple): Tuple =
   xs match
     case Nil      => acc
     case (h :: t) => h *: toTuple(t, acc)

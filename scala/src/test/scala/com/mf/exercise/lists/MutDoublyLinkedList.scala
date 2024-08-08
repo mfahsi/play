@@ -29,7 +29,7 @@ class MutableDoublyLinkedList[A] {
   def length: Int = {
     var count = 0
     var current = head
-    while (current.isDefined) {
+    while current.isDefined do {
       count += 1
       current = current.get.next
     }
@@ -39,10 +39,10 @@ class MutableDoublyLinkedList[A] {
   override def toString: String = {
     val sb = new StringBuilder("MutableDoublyLinkedList(")
     var current = head
-    while (current.isDefined) {
+    while current.isDefined do {
       sb.append(current.get.value)
       current = current.get.next
-      if (current.isDefined) sb.append(", ")
+      if current.isDefined then sb.append(", ")
     }
     sb.append(")").toString()
   }

@@ -9,7 +9,7 @@ class StackMin {
 
   def pop(): Option[Int] = {
     val index = data.size - 1
-    if (index < 0) None
+    if index < 0 then None
     else {
       val e = data.remove(index)
       minData.remove(index)
@@ -25,7 +25,7 @@ class StackMin {
   def push(e: Int): StackMin = {
     val min = currentMin()
     data.append(e)
-    if (e < min.getOrElse(Int.MaxValue)) {
+    if e < min.getOrElse(Int.MaxValue) then {
       minData.append(e)
     } else {
       minData.append(min.getOrElse(Int.MaxValue))

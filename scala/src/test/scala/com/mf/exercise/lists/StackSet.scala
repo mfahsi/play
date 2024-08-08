@@ -20,7 +20,7 @@ class StackSet[Plate](val stackCapacity: Int = 4) {
 
   def pop(): Plate = {
     val stack = stacks.top
-    if (stack.isEmpty) {
+    if stack.isEmpty then {
       stacks.pop()
       pop()
     } else {
@@ -30,7 +30,7 @@ class StackSet[Plate](val stackCapacity: Int = 4) {
 
   def push(p: Plate): Unit = {
     val stack = stacks.top
-    if (stack.size >= stackCapacity) {
+    if stack.size >= stackCapacity then {
       stacks.push(Stack())
       push(p)
     } else {

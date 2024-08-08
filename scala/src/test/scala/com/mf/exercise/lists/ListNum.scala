@@ -4,23 +4,23 @@ import com.mf.exercise.lists.ListNum.{asNum, sumNumbers}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should
 
-
 object ListNum:
   type Digit = Int
   type NUM = List[Digit]
 
-  //@tailrec
+  // @tailrec
   def sumList(nums: List[NUM], out: NUM): List[Digit] = {
     val heads = nums.map(_.headOption)
-    val tails: List[NUM] = nums.filterNot(_.isEmpty).map(_.tail).filter(_ != Nil)
+    val tails: List[NUM] =
+      nums.filterNot(_.isEmpty).map(_.tail).filter(_ != Nil)
     val headsum = heads.filter(_.isDefined).map(_.getOrElse(0)).sum
     println(headsum)
     val sum: List[Digit] = ListNum.asNum(headsum)
     val res: NUM = out.appended(sum.head)
     (sum.tail, tails) match {
-      case (Nil, Nil) => res
+      case (Nil, Nil)   => res
       case (Nil, tails) => sumList(tails, res)
-      case _ => sumList(tails ++ List(sum.tail), res)
+      case _            => sumList(tails ++ List(sum.tail), res)
     }
   }
 
@@ -35,7 +35,7 @@ object ListNum:
   extension [A](list: List[A]) {
     def quickSort(implicit cmp: Ordering[A]): List[A] = {
       list match {
-        case Nil => Nil
+        case Nil         => Nil
         case head :: Nil => head :: Nil
         case _ => {
           val pivot = list.head
@@ -49,7 +49,6 @@ object ListNum:
       }
     }
   }
-
 
 class ListNumTest extends AnyFlatSpec with should.Matchers {
   behavior of "ListNum"
@@ -68,8 +67,3 @@ class ListNumTest extends AnyFlatSpec with should.Matchers {
     List[Int](3, 4, 8, 2).quickSort should be(List(2, 3, 4, 8))
   }
 }
-
-
-
-
-
