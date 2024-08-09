@@ -12,7 +12,7 @@ object MaxVolwels {
     else
       val array = s.substring(0, k)
       val count = array.count(isVowel)
-      Range(0, s.length - k - 1, 1)
+      Range(0, s.length - k, 1)
         .foldLeft((count, count))((b, i) => {
           val old = if isVowel(s.charAt(i)) then 1 else 0
           val added = if isVowel(s.charAt(i + k)) then 1 else 0
@@ -49,7 +49,7 @@ class TestMaxVowels extends AnyFlatSpec with should.Matchers {
   behavior of "MaxVowels"
 
   "max volwels" should "count max within size" in {
-    MaxVolwels.maxVowels("hello abcd heeehaa xxxxzas", 6) should be(5)
+    MaxVolwels.maxVowels("weallloveyou", 7) should be(4)
   }
   "max volwels" should "empty string" in {
     MaxVolwels.maxVowels("", 3) should be(0)
